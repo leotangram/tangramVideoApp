@@ -1,25 +1,30 @@
 //import liraries
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
+import Layout from '../components/suggestion-list-layout';
 
 // create a component
 class SuggestionList extends Component {
   render() {
     const list = [
       {
-        title: 'Leo',
+        title: 'Titulo',
         key: '1'
       },
       {
-        title: 'nidas',
+        title: 'Otro titulo',
         key: '2'
       }
     ]
     return (
-      <FlatList
-        data={list}
-        renderItem={({ item }) => <Text>{item.title}</Text>}
-      />
+      <Layout
+        title="Recomendado para ti"
+      >
+        <FlatList
+          data={list}
+          renderItem={({ item }) => <Text>{item.title}</Text>}
+        />
+      </Layout>
     )
   }
 }
