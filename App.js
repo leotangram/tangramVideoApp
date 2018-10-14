@@ -4,6 +4,7 @@ import {
 } from 'react-native';
 import Home from './src/screens/containers/home';
 import Header from './src/sections/components/header';
+import SuggestionList from './src/videos/containers/suggestion-list';
 
 type Props = {};
 export default class App extends Component<Props> {
@@ -13,7 +14,7 @@ export default class App extends Component<Props> {
         <Header />
         <Text>buscador</Text>
         <Text>categorias</Text>
-        <Text>sugerencias</Text>
+        <SuggestionList />
       </Home>      
     );
   }
