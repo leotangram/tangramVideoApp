@@ -1,22 +1,28 @@
 import React, { Component } from 'react';
 import {
-  Text
+  Text,
 } from 'react-native';
+
 import Home from './src/screens/containers/home';
 import Header from './src/sections/components/header';
 import SuggestionList from './src/videos/containers/suggestion-list';
-import Api from './utils/api';
+import API from './utils/api';
+import CategoryList from './src/videos/containers/category-list.js';
 
 type Props = {};
 export default class App extends Component<Props> {
   state = {
-    suggestionList: []
+    suggestionList: [],
+    categoryList: [],
   }
   async componentDidMount() {
-    const movies = await Api.getSuggestion(10);
+    const movies = await API.getSuggestion(10);
+    const categories = await API.getMovies();
     console.log(movies);
+    console.log(categories);
     this.setState({
-      suggestionList: movies
+      suggestionList: movies,
+      categoryList: categories,
     })
   }
   render() {
@@ -24,8 +30,11 @@ export default class App extends Component<Props> {
       <Home>
         <Header />
         <Text>buscador</Text>
-        <Text>categorias</Text>
-        <SuggestionList 
+        <Text>categorías</Text>
+        <CategoryList
+          list={this.state.categoryList}
+        />
+        <SuggestionList
           list={this.state.suggestionList}
         />
       </Home>
