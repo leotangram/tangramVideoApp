@@ -4,7 +4,7 @@ import {
   StyleSheet
 } from 'react-native';
 
-function HorizontalSeparator(params) {
+function HorizontalSeparator(props) {
   return (
     <View
       style={styles.separator}
