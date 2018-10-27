@@ -1,28 +1,46 @@
-//import liraries
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
 import Video from 'react-native-video';
+import {
+  StyleSheet,
+  ActivityIndicator
+} from 'react-native';
 import Layout from '../components/layout';
 
-// create a component
 class Player extends Component {
+  state = {
+    loading: true,
+  }
+  onBuffer = ({ isBuffering }) => {
+    this.setState({
+      loading: isBuffering
+    })
+  }
+  onLoad = () => {
+    this.setState({
+      loading: false
+    })
+  }
   render() {
     return (
       <Layout
+        loading={this.state.loading}
         video={
           <Video
             source={{ uri: 'https://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4' }}
             style={styles.video}
             resizeMode="contain"
+            onBuffer={this.onBuffer}
+            onLoad={this.onLoad}
           />
         }
-      >
-      </Layout>
-    );
+        loader={
+          <ActivityIndicator color="red" />
+        }
+      />
+    )
   }
 }
 
-// define your styles
 const styles = StyleSheet.create({
   video: {
     position: 'absolute',
@@ -31,7 +49,6 @@ const styles = StyleSheet.create({
     bottom: 0,
     top: 0,
   }
-});
+})
 
-//make this component available to the app
-export default Player;
+export default Player
