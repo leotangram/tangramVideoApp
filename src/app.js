@@ -3,14 +3,14 @@ import React, { Component } from 'react';
 import {
   Text
 } from 'react-native';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 import API from '../utils/api';
 import Home from './screens/containers/home';
 import Header from './sections/components/header';
 import SuggestionList from './videos/containers/suggestion-list';
 import CategoryList from './videos/containers/category-list.js';
-import Player from './player/containers/player';
+import Movie from './screens/containers/movie';
 
 // create a component
 class AppLayout extends Component {
@@ -31,10 +31,12 @@ class AppLayout extends Component {
     })
   }
   render() {
+    if (this.props.selectedMovie) {
+      return <Movie />
+    }
     return (
       <Home>
         <Header />
-        <Player />
         <Text>buscador</Text>
         <CategoryList />
         <SuggestionList />
@@ -43,5 +45,11 @@ class AppLayout extends Component {
   }
 }
 
+function mapStateToProps(state) {
+  return {
+    selectedMovie: state.selectedMovie
+  }
+}
+
 //make this component available to the app
-export default connect(null)(AppLayout);
+export default connect(mapStateToProps)(AppLayout);

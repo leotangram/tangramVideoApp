@@ -2,32 +2,37 @@ import React from 'react';
 import {
   View,
   Text,
-  Image, 
-  StyleSheet
+  Image,
+  StyleSheet,
+  TouchableOpacity
 } from 'react-native';
 
 function Suggestion(props) {
   let genre = (props.genres) ? props.genres[0] : "No category"
   return (
-    <View style={styles.container}>
-      <View style={styles.left}>
-        <Image 
-          style={styles.cover}
-          // source={require('../../../assets/logo.png')}
-          source={{
-            uri: props.medium_cover_image
-          }}
-        />
-        <View style={styles.genre}>
-          <Text style={styles.genreText}>{genre}</Text>
+    <TouchableOpacity
+      onPress={props.onPress}
+    >
+      <View style={styles.container}>
+        <View style={styles.left}>
+          <Image
+            style={styles.cover}
+            // source={require('../../../assets/logo.png')}
+            source={{
+              uri: props.medium_cover_image
+            }}
+          />
+          <View style={styles.genre}>
+            <Text style={styles.genreText}>{genre}</Text>
+          </View>
+        </View>
+        <View style={styles.right}>
+          <Text style={styles.title}>{props.title}</Text>
+          <Text style={styles.year}>{props.year}</Text>
+          <Text style={styles.rating}>{props.rating}</Text>
         </View>
       </View>
-      <View style={styles.right}>
-        <Text style={styles.title}>{props.title}</Text>
-        <Text style={styles.year}>{props.year}</Text>
-        <Text style={styles.rating}>{props.rating}</Text>
-      </View>
-    </View>
+    </TouchableOpacity>
   )
 }
 
